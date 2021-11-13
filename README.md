@@ -53,13 +53,16 @@ For deploying these services on top of kubernetes, there are two main steps list
 
 1. Build the docker image:
 
-Validation-
+1. Validation-
+
 `docker build -t validationservice:latest .`
 
-Slack-
+2. Slack-
+
 `docker build -t slackservice:latest .`
 
-Email-
+3. Email-
+
 `docker build -t emailservice:latest .`
 
 2. Login to the Docker Hub or JFrog Artifactory.
