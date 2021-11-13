@@ -26,3 +26,20 @@ Response Codes:
 
 ![Response Codes](https://github.com/Anshita1Saxena/notification-api/blob/main/demo-image/Response%20Codes.JPG)
 
+## Advantages
+1. Proactive actions on exceptions
+2. Quick remediation of problems (raised errors and exceptions)
+3. Reduced login to the servers
+4. Reduced time for investigation of exceptions
+
+## Environment Details
+Validation, Slack, and Email APIs are deployed on Kubernetes(k8s) cluster as a pod. The following high level steps are listed below:
+1. These APIs are developed in Flask framework.
+2. APIs are wrapped in docker containers.
+3. Docker Images are pushed in JFrog Artifactory.
+4. Prepared Deployment yaml files for running as pods on Kubernetes
+5. Deployed these services on Kubernetes
+
+Base python version for docker container is 3.6
+All three services are placed in `validation`, `slack`, and `email` directories with the `Dockerfile` file for creating the docker images, `.ini` files for properties required to run an application, `requirements.txt` file with required packages, and `.py` files for python application.
+Kubernetes cluster runs on Red Hat bare metal servers. Kubernetes deployment yaml files are kept in directories- 
