@@ -18,7 +18,7 @@ spec:
       containers:
       - name: email-python
         # artifactory-repository.com is the repository name where the image pushed, for example, docker.io, jfrog artifactory.
-        image: artifactory-repository.com/tpdemailprodamsserviceapp:latest
+        image: artifactory-repository.com/emailservice:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 4000
