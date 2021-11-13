@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-python
+spec:
+  selector:
+    matchLabels:
+      app: email-python
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: email-python
+    spec:
+      # imagePullSecret stores docker credentials that are used for accessing a registry.
+      imagePullSecrets:
+      - name: tpdservice-devops-image-pull-secret
+      containers:
+      - name: email-python
+        # artifactory-repository.com is the repository name where the image pushed, for example, docker.io, jfrog artifactory.
+        image: artifactory-repository.com/tpdemailprodamsserviceapp:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 4000
+        volumeMounts:
+          - name: emailapp-ini
+            mountPath: /app/emailapp.ini
+            subPath: emailapp.ini
+            readOnly: true
+      volumes:
+        - name: emailapp-ini
+          secret:
+            secretName: emailapp.ini

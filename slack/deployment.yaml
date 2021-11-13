@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: slack-python
+spec:
+  selector:
+    matchLabels:
+      app: slack-python
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: slack-python
+    spec:
+      # imagePullSecret stores docker credentials that are used for accessing a registry.
+      imagePullSecrets:
+      - name: tpdservice-devops-image-pull-secret
+      containers:
+      - name: slack-python
+        # artifactory-repository.com is the repository name where the image pushed, for example, docker.io, jfrog artifactory.
+        image: artifactory-repository.com/tpdslackprodamsserviceapp:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+        volumeMounts:
+          - name: mainapp-ini
+            mountPath: /app/mainapp.ini
+            subPath: mainapp.ini
+            readOnly: true
+      volumes:
+        - name: mainapp-ini
+          secret:
+            secretName: mainapp.ini

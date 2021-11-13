@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-app
+spec:
+  selector:
+    app: email-python
+  ports:
+  - protocol: "TCP"
+    port: 80
+    targetPort: 4000
+    nodePort: 30308
+  type: NodePort

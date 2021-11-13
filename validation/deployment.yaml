@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: validation-python
+spec:
+  selector:
+    matchLabels:
+      app: validation-python
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: validation-python
+    spec:
+      # imagePullSecret stores docker credentials that are used for accessing a registry.
+      imagePullSecrets:
+      - name: tpdservice-devops-image-pull-secret
+      containers:
+      - name: validation-python
+        # artifactory-repository.com is the repository name where the image pushed, for example, docker.io, jfrog artifactory.
+        image: artifactory-repository.com/tpdvalidationprodamsserviceapp:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 2000
+        volumeMounts:
+          - name: application-ini
+            mountPath: /app/application.ini
+            subPath: application.ini
+            readOnly: true
+      volumes:
+        - name: application-ini
+          secret:
+            secretName: application.ini
