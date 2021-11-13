@@ -52,50 +52,73 @@ For deploying these services on top of kubernetes, there are two main steps list
 **1. Docker Images:**
 
 1. Build the docker image:
+
 Validation-
 `docker build -t validationservice:latest .`
+
 Slack-
 `docker build -t slackservice:latest .`
+
 Email-
 `docker build -t emailservice:latest .`
 
 2. Login to the Docker Hub or JFrog Artifactory.
+
 For JFrog Artifactory, command is written below:
 `docker login -u <your-user-name> -p <your-password> https://<your-repository-domain>`
+
 For docker.io, command is written below:
 `docker login docker.io --username=<your-user-name> --password=<your-password> --email=<your-email-address>`
+
 3. Tagging the images:
+
 Validation-
 `docker tag validationservice:latest <your-repository-domain>/validationservice:latest`
+
 Slack-
 `docker tag slackservice:latest <your-repository-domain>/slackservice:latest`
+
 Email-
 `docker tag emailservice:latest <your-repository-domain>/emailservice:latest`
 
 4. Pushing the images to the Docker Hub or JFrog Artifactory.
+
 Validation-
 `docker push <your-repository-domain>/validationservice:latest`
+
 Slack-
 `docker push <your-repository-domain>/slackservice:latest`
+
 Email-
 `docker push <your-repository-domain>/emailservice:latest`
 
 **2. Kubernetes Commands:**
 1. Creating and viewing namespace in kubernetes:
+
 `kubectl create namespace alerts`
+
 `kubectl get namespaces`
 
 2. Create all three different directories:
+
+Validation-
 `mkdir validation`
+
+Slack-
 `mkdir slack`
+
+Email-
 `mkdir email`
 
 3. Keep `.ini` file for creating secrets, `service.yaml` file for creating service, and `deployment.yaml` file for creating deployments.
 
 4. Creating and viewing secrets:
+
 Validation-
 `kubectl create secret generic application.ini --from-file application.ini -n alerts`
+
 Slack-
 `kubectl create secret generic mainapp.ini --from-file mainapp.ini -n alerts`
+
 Email-
 `kubectl create secret generic emailapp.ini --from-file emailapp.ini -n alerts`
