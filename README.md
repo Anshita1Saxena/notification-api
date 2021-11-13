@@ -41,5 +41,61 @@ Validation, Slack, and Email APIs are deployed on Kubernetes(k8s) cluster as a p
 5. Deployed these services on Kubernetes
 
 Base python version for docker container is 3.6
-All three services are placed in `validation`, `slack`, and `email` directories with the `Dockerfile` file for creating the docker images, `.ini` files for properties required to run an application, `requirements.txt` file with required packages, and `.py` files for python application.
-Kubernetes cluster runs on Red Hat bare metal servers. Kubernetes deployment yaml files are kept in directories- 
+All three services are placed in `validation`, `slack`, and `email` directories with the `Dockerfile` file for creating the docker images, `.ini` files for properties required to run an application, `requirements.txt` file with required packages, and `.py` files for python application, and `.yaml` files are deployment files for deploying the application on k8s cluster.
+Kubernetes cluster runs on Red Hat bare metal servers. Docker is installed on bare metal to build, tag, and push the images to JFrog Artifactory or Docker Hub. This project is currently working in Production and JFrog Artifactory is used for keeping docker images in the repository.
+
+## Working Details
+For deploying these services on top of kubernetes, there are two main steps listed below:
+1. Docker Images: Build, tag, and push docker images into the repository
+2. Kubernetes Commands: Deploy the services on k8s cluster with the help of secret command, service.yaml file, and deployment.yaml file.
+
+**1. Docker Images:**
+
+1. Build the docker image:
+Validation-
+`docker build -t validationservice:latest .`
+Slack-
+`docker build -t slackservice:latest .`
+Email-
+`docker build -t emailservice:latest .`
+
+2. Login to the Docker Hub or JFrog Artifactory.
+For JFrog Artifactory, command is written below:
+`docker login -u <your-user-name> -p <your-password> https://<your-repository-domain>`
+For docker.io, command is written below:
+`docker login docker.io --username=<your-user-name> --password=<your-password> --email=<your-email-address>`
+3. Tagging the images:
+Validation-
+`docker tag validationservice:latest <your-repository-domain>/validationservice:latest`
+Slack-
+`docker tag slackservice:latest <your-repository-domain>/slackservice:latest`
+Email-
+`docker tag emailservice:latest <your-repository-domain>/emailservice:latest`
+
+4. Pushing the images to the Docker Hub or JFrog Artifactory.
+Validation-
+`docker push <your-repository-domain>/validationservice:latest`
+Slack-
+`docker push <your-repository-domain>/slackservice:latest`
+Email-
+`docker push <your-repository-domain>/emailservice:latest`
+
+**2. Kubernetes Commands:**
+1. Creating and viewing namespace in kubernetes:
+`kubectl create namespace alerts`
+`kubectl get namespaces`
+
+2. Create all three different directories:
+`mkdir validation`
+`mkdir slack`
+`mkdir email`
+
+3. Keep `.ini` file for creating secrets, `service.yaml` file for creating service, and `deployment.yaml` file for creating deployments.
+
+4. Creating and viewing secrets:
+Validation-
+`kubectl create secret generic application.ini --from-file application.ini -n alerts`
+Slack-
+`kubectl create secret generic mainapp.ini --from-file mainapp.ini -n alerts`
+Email-
+`kubectl create secret generic emailapp.ini --from-file emailapp.ini -n alerts`
