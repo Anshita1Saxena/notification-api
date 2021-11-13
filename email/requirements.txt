@@ -1,0 +1,5 @@
+flask_api
+flask_mail
+flask
+requests
+configparser

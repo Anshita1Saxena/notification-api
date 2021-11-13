@@ -1,0 +1,4 @@
+flask-api
+flask
+requests
+configparser
