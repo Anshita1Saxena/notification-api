@@ -18,7 +18,7 @@ spec:
       containers:
       - name: validation-python
         # artifactory-repository.com is the repository name where the image pushed, for example, docker.io, jfrog artifactory.
-        image: artifactory-repository.com/tpdvalidationprodamsserviceapp:latest
+        image: artifactory-repository.com/validationservice:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 2000
