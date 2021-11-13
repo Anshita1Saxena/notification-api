@@ -82,30 +82,20 @@ For deploying these services on top of kubernetes, there are two main steps list
 **2. Kubernetes Commands:**
 1. Creating and viewing namespace in kubernetes:
 
-`kubectl create namespace alerts`
-
-`kubectl get namespaces`
+    `kubectl create namespace alerts`
+    
+    `kubectl get namespaces`
 
 2. Create all three different directories:
 
-Validation-
-`mkdir validation`
-
-Slack-
-`mkdir slack`
-
-Email-
-`mkdir email`
+    * Validation- `mkdir validation`
+    * Slack- `mkdir slack`
+    * Email- `mkdir email`
 
 3. Keep `.ini` file for creating secrets, `service.yaml` file for creating service, and `deployment.yaml` file for creating deployments.
 
 4. Creating and viewing secrets:
 
-Validation-
-`kubectl create secret generic application.ini --from-file application.ini -n alerts`
-
-Slack-
-`kubectl create secret generic mainapp.ini --from-file mainapp.ini -n alerts`
-
-Email-
-`kubectl create secret generic emailapp.ini --from-file emailapp.ini -n alerts`
+    * Validation- `kubectl create secret generic application.ini --from-file application.ini -n alerts`
+    * Slack- `kubectl create secret generic mainapp.ini --from-file mainapp.ini -n alerts`
+    * Email- `kubectl create secret generic emailapp.ini --from-file emailapp.ini -n alerts`
