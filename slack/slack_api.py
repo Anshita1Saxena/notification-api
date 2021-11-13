@@ -64,8 +64,10 @@ def slack_alert():
 
             # Post the request to validation API for performing data checks
             # Setting timeout for 6 seconds
+            # 10.198.2.194 is the private ip of the master node of cluster
+            # 30306 is the node-port chosen for this service
             response = requests.post(
-                url='http://10.175.226.107:30361/api/tpd/v1/validation',
+                url='http://10.198.2.194:30306/api/tpd/v1/validation',
                 json=send_data, timeout=6.0)
 
             """If status code is 400,
