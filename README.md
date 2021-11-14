@@ -167,3 +167,16 @@ For deploying these services on top of kubernetes, there are two main steps list
         replicaset.apps/email-python-xxxxxxxxx        3         3         3       79s
         replicaset.apps/slack-python-xxxxxxxxx        3         3         3       79s
         replicaset.apps/validation-python-xxxxxxxxx   3         3         3       79s
+
+## Highlights
+1. Python Microservices
+2. Dockerization and Containerization Concepts
+3. Integration of Mail and Slack
+4. Deployment of interconnected APIs on Kubernetes (k8s)
+
+## Demo Screenshots
+Slack Alert API Screenshot:
+![Slack Message Alert by API.JPG](https://github.com/Anshita1Saxena/notification-api/blob/main/demo-image/Slack%20Message%20Alert%20by%20API.JPG)
+
+Email Alert API Screenshot:
+![Mail Alert by API.JPG](https://github.com/Anshita1Saxena/notification-api/blob/main/demo-image/Mail%20Alert%20by%20API.JPG)
