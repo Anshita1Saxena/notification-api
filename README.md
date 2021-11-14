@@ -137,7 +137,7 @@ For deploying these services on top of kubernetes, there are two main steps list
 
 7. Get all kinds existed under `alerts` namespace-
 
-    `xxxxxxxxx-xxxxx` signifies the id assigned by kubernetes while creation of pod in `pod/email-python`, `pod/slack-python`, `pod/validation-python`. Cluster-IP is the ip address assigned to services by kubernetes. 
+    `xxxxxxxxx-xxxxx`and `xxxxxxxxx` signify the id assigned by kubernetes while creation of pod in `pod/email-python`, `pod/slack-python`, `pod/validation-python` and creation of replicasets in `replicaset.apps/email-python`, `replicaset.apps/slack-python`, `replicaset.apps/validation-python`. Cluster-IP is the ip address assigned to services by kubernetes. 
 
         kubectl get all -n alerts
         NAME                                    READY   STATUS    RESTARTS   AGE
@@ -164,6 +164,6 @@ For deploying these services on top of kubernetes, there are two main steps list
         deployment.apps/validation-python   3/3     3            3           79s
 
         NAME                                          DESIRED   CURRENT   READY   AGE
-        replicaset.apps/email-python-6b9769fbb        3         3         3       79s
-        replicaset.apps/slack-python-5955d65b75       3         3         3       79s
-        replicaset.apps/validation-python-cd7f8576b   3         3         3       79s
+        replicaset.apps/email-python-xxxxxxxxx        3         3         3       79s
+        replicaset.apps/slack-python-xxxxxxxxx        3         3         3       79s
+        replicaset.apps/validation-python-xxxxxxxxx   3         3         3       79s
